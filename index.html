@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bango Design - AI-Powered Campaign Platform</title>
+  
+  <!-- Premium Inline SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%238A00FF'/%3E%3Cpath d='M 25 70 L 45 40 L 65 60' stroke='white' stroke-width='4' stroke-dasharray='4,4' fill='none'/%3E%3Ccircle cx='25' cy='70' r='6' fill='%23FF3B9F'/%3E%3Ccircle cx='45' cy='40' r='6' fill='white'/%3E%3Ccircle cx='65' cy='60' r='6' fill='%23FF3B9F'/%3E%3C/svg%3E">
+  <!-- Standard Favicon Fallbacks -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.png" type="image/png">
+
+  <!-- Premium Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0052FF;
+      --primary-hover: #003CD3;
+      --accent-purple: #8A00FF;
+      --accent-pink: #FF3B9F;
+      --accent-orange: #FF8A00;
+      --text-dark: #0F172A;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --max-width: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-dark);
+      background-color: #FAFAFD;
+      line-height: 1.4;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ==========================================
+       Vibrant Noisy Gradient Blur Background 
+       ========================================== */
+    .jitter-bg-container {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: #F8F9FC;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* Giant Vibrant Blurred Light Blobs */
+    .jitter-blob-1 {
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, var(--accent-pink) 0%, rgba(255, 255, 255, 0) 70%);
+      filter: blur(80px);
+      opacity: 0.28;
+      animation: driftGlow1 22s ease-in-out infinite alternate;
+    }
+
+    .jitter-blob-2 {
+      position: absolute;
+      bottom: -10%;
+      left: -5%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-purple) 0%, rgba(255, 255, 255, 0) 70%);
+      filter: blur(80px);
+      opacity: 0.22;
+      animation: driftGlow2 26s ease-in-out infinite alternate;
+    }
+
+    .jitter-blob-3 {
+      position: absolute;
+      top: 35%;
+      left: 30%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--accent-orange) 0%, rgba(255, 255, 255, 0) 70%);
+      filter: blur(90px);
+      opacity: 0.18;
+      animation: driftGlow1 18s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes driftGlow1 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-60px, 40px) scale(1.1); }
+      100% { transform: translate(40px, -30px) scale(0.95); }
+    }
+
+    @keyframes driftGlow2 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.05); }
+      100% { transform: translate(-40px, 20px) scale(0.9); }
+    }
+
+    /* High-contrast noise film grain overlay (Jitter Style) */
+    .jitter-noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.12;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Floating Glass Header Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.75rem;
+      max-width: var(--max-width);
+      width: calc(100% - 2rem);
+      margin: 0.75rem auto 0 auto;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 9999px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      z-index: 10;
+    }
+
+    /* Header Logo container */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header-logo-img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-container span {
+      font-weight: 800;
+      font-size: 1.75rem;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .btn-sm {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-sm:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Compressed Split-Screen Hero */
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      z-index: 2;
+    }
+
+    .hero-left {
+      text-align: left;
+    }
+
+    /* Heading Anchor Link */
+    .hero-title-link {
+      text-decoration: none;
+      color: inherit;
+      display: inline-block;
+      transition: opacity 0.2s ease;
+    }
+
+    .hero-title-link:hover {
+      opacity: 0.85;
+    }
+
+    .hero-left h1 {
+      font-size: 3.25rem;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+
+    .hero-left h1 span {
+      background: linear-gradient(135deg, var(--primary) 0%, #3B82F6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-left p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    /* Linkable Hero Logo container */
+    .brand-logo-showcase {
+      display: inline-flex;
+      justify-content: flex-start;
+      margin-bottom: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .brand-logo-showcase:hover {
+      opacity: 0.85;
+    }
+
+    /* Linkable Launch Date container */
+    .launch-date-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 0.4rem 1.1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .launch-date-container:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .btn-lg {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.85rem 2.25rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 82, 255, 0.2);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-lg:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1.5px);
+    }
+
+    /* ==========================================
+       RIGHT COLUMN: Bango Campaign Wizard Mockup
+       ========================================== */
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .workspace-window {
+      width: 100%;
+      max-width: 410px;
+      height: 450px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* OS Controls Header */
+    .window-header {
+      height: 36px;
+      background: rgba(255, 255, 255, 0.5);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      gap: 6px;
+    }
+
+    .window-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #FF5F56; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #27C93F; }
+
+    .window-title-text {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Layout Columns */
+    .window-body {
+      display: grid;
+      grid-template-columns: 100px 1fr 100px;
+      flex-grow: 1;
+      height: calc(100% - 36px);
+    }
+
+    /* Left Sidebar: Progress Steps Tracker */
+    .step-sidebar {
+      background: rgba(255, 255, 255, 0.4);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      padding: 0.75rem 0.5rem;
+      gap: 0.65rem;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      font-size: 7.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 0.25rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid transparent;
+    }
+
+    .step-item.active {
+      background: #EEF2FF;
+      color: var(--primary);
+      border-color: rgba(0, 82, 255, 0.15);
+    }
+
+    .step-item.active .step-status {
+      color: var(--accent-purple);
+    }
+
+    .step-num { font-size: 6px; text-transform: uppercase; opacity: 0.7; margin-bottom: 1px; }
+    .step-status { font-size: 5.5px; font-weight: 800; text-transform: uppercase; color: #10B981; margin-top: 1px; }
+
+    /* Center Section: Wizard Assistant Canvas */
+    .wizard-canvas-area {
+      position: relative;
+      background: #FFFFFF;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem;
+      justify-content: flex-start;
+    }
+
+    /* Background Glowing Blob strictly inside the canvas area */
+    .canvas-glow-blob {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, var(--accent-pink) 0%, var(--accent-purple) 60%, transparent 100%);
+      filter: blur(24px);
+      opacity: 0.15;
+      top: 15%;
+      left: 15%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Wizard Content styling */
+    .assistant-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .assistant-bubble {
+      background: #F1F5F9;
+      padding: 0.6rem;
+      border-radius: 8px 8px 8px 0;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    /* Typing Input Field representation for Step 1 */
+    .assistant-input-box {
+      border: 1.5px solid var(--primary);
+      border-radius: 6px;
+      padding: 0.5rem;
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 0 0 3px rgba(0, 82, 255, 0.08);
+    }
+
+    .typed-cursor {
+      width: 1.5px;
+      height: 11px;
+      background: var(--primary);
+      animation: blinkCursor 0.8s infinite;
+    }
+
+    @keyframes blinkCursor {
+      50% { opacity: 0; }
+    }
+
+    .wizard-next-btn {
+      align-self: flex-end;
+      background: var(--primary);
+      color: #FFFFFF;
+      font-size: 8px;
+      font-weight: 800;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Right Sidebar: Real-Time Price Estimator */
+    .pricing-panel {
+      background: rgba(255, 255, 255, 0.4);
+      border-left: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      padding: 0.75rem 0.5rem;
+      gap: 0.85rem;
+    }
+
+    .panel-heading-text {
+      font-size: 7px;
+      font-weight: 800;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .calculator-block {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 7px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .calc-row.total {
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.35rem;
+      font-size: 8px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .calc-row span.green-p {
+      color: #10B981;
+    }
+
+    /* Features Grid */
+    .features-section {
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3.5rem 2rem;
+      z-index: 2;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(0, 82, 255, 0.2);
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .feature-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Refined Countdown Styling */
+    .countdown-section {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-color);
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .countdown-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.25rem;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 1.15rem;
+      min-width: 85px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .countdown-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(135deg, var(--text-dark) 0%, #475569 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .countdown-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .countdown-divider {
+      font-size: 2rem;
+      font-weight: 300;
+      color: #CBD5E1;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(241, 245, 249, 0.6);
+      width: 100%;
+      background: white;
+      font-weight: 500;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 2.5rem;
+      width: calc(100% - 2rem);
+      max-width: 440px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(241, 245, 249, 0.8);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1.1rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 82, 255, 0.1);
+      background: white;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.85rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 82, 255, 0.15);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+      }
+      .brand-logo-showcase {
+        justify-content: center;
+      }
+      .hero-left {
+        text-align: center;
+      }
+      .hero-left p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-left h1 {
+        font-size: 2.5rem;
+      }
+      header {
+        border-radius: 16px;
+        margin: 0.5rem auto 0 auto;
+        padding: 0.75rem 1rem;
+      }
+      .countdown-grid {
+        gap: 0.5rem;
+      }
+      .countdown-item {
+        padding: 0.75rem 0.4rem;
+        min-width: 65px;
+      }
+      .countdown-number {
+        font-size: 1.75rem;
+      }
+      .workspace-window {
+        max-width: 100%;
+        height: 380px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Jitter Noisy Background Containers -->
+  <div class="jitter-bg-container">
+    <div class="radial-glow-1"></div>
+    <div class="radial-glow-2"></div>
+    <div class="jitter-blob-1"></div>
+    <div class="jitter-blob-2"></div>
+    <div class="jitter-blob-3"></div>
+  </div>
+  <!-- Tactile film grain overlay -->
+  <div class="jitter-noise-overlay"></div>
+
+  <!-- Header Navigation -->
+  <header>
+    <a href="https://bangodesign.cloud" class="logo-container">
+      
+      <!-- SWAPPABLE LOGO PNG: Upload "logo.png" to your directory and this image will render dynamically -->
+      <img class="header-logo-img" src="logo.png" alt="Bango Design Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      
+      <!-- Modern Inline Fallback Vector (Will render if logo.png is missing) -->
+      <svg width="200" height="48" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: -4px; display: none;">
+        <defs>
+          <linearGradient id="headerNibGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FF3B9F" />
+            <stop offset="100%" stop-color="#8A00FF" />
+          </linearGradient>
+        </defs>
+        <path d="M 6 34 L 22 12 L 36 29" stroke="#000" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
+        <circle cx="6" cy="34" r="2.5" fill="#D250FF" stroke="#000" stroke-width="1.2" />
+        <circle cx="22" cy="12" r="2.5" fill="#8A00FF" stroke="#000" stroke-width="1.2" />
+        <circle cx="36" cy="29" r="2.5" fill="#FF3B9F" stroke="#000" stroke-width="1.2" />
+        <g transform="translate(36, 29) rotate(-30) scale(0.48)">
+          <path d="M 0 0 L 25 -15 L 55 -15 L 65 -25 L 75 -15 L 75 15 L 65 25 L 55 15 L 25 15 Z" fill="url(#headerNibGrad)" stroke="#000" stroke-width="2" />
+          <line x1="0" y1="0" x2="35" y2="0" stroke="#000" stroke-width="2" />
+          <circle cx="35" cy="0" r="6" fill="#FFF" stroke="#000" stroke-width="2" />
+          <path d="M 65 -25 L 75 -15 L 75 15 L 65 25 Z" fill="#000" />
+        </g>
+        <text x="44" y="38" font-family="inherit" font-weight="800" font-size="22" letter-spacing="1.5" fill="#8A00FF">BANGO</text>
+        <text x="122" y="24" font-family="inherit" font-weight="600" font-size="7.5" letter-spacing="2.5" fill="#1E293B">DESIGN</text>
+      </svg>
+      <span>.cloud</span>
+    </a>
+    <div class="header-right">
+      <span class="launch-badge-header">Launching 1st August 2026</span>
+      <button class="btn-sm open-waitlist-btn">Join Waitlist</button>
+    </div>
+  </header>
+
+  <!-- Hero Section Layout -->
+  <div class="hero-container">
+    
+    <!-- Hero Left Column -->
+    <div class="hero-left">
+      <a href="https://bangodesign.cloud" class="brand-logo-showcase">
+        
+        <!-- SWAPPABLE HERO LOGO PNG: Automatically swaps with logo.png when available -->
+        <img class="header-logo-img" style="height: 72px;" src="logo.png" alt="Bango Design Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        
+        <!-- Fallback Vector Representation -->
+        <svg width="340" height="150" viewBox="0 0 340 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <defs>
+            <linearGradient id="mainNibGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#FF3B9F" />
+              <stop offset="100%" stop-color="#8A00FF" />
+            </linearGradient>
+          </defs>
+          
+          <path d="M 35 110 L 95 30 L 150 100" stroke="#000000" stroke-width="2" stroke-dasharray="4,4" fill="none" />
+          <circle cx="35" cy="110" r="7" fill="#D250FF" stroke="#000" stroke-width="2" />
+          <circle cx="95" cy="30" r="7" fill="#8A00FF" stroke="#000" stroke-width="2" />
+          <circle cx="150" cy="100" r="7" fill="#FF3B9F" stroke="#000" stroke-width="2" />
+          
+          <g transform="translate(150, 100) rotate(-32) scale(1.2)">
+            <path d="M 0 0 L 25 -15 L 55 -15 L 65 -25 L 75 -15 L 75 15 L 65 25 L 55 15 L 25 15 Z" fill="url(#mainNibGrad)" stroke="#000" stroke-width="1.5" />
+            <line x1="0" y1="0" x2="35" y2="0" stroke="#000" stroke-width="1.5" />
+            <circle cx="35" cy="0" r="6" fill="#FFF" stroke="#000" stroke-width="1.5" />
+            <path d="M 65 -25 L 75 -15 L 75 15 L 65 25 Z" fill="#000" />
+          </g>
+          
+          <text x="178" y="88" font-family="inherit" font-weight="700" font-size="14" letter-spacing="5" fill="#1E293B">DESIGN</text>
+          <text x="48" y="146" font-family="inherit" font-weight="800" font-size="52" letter-spacing="3.5" fill="#8A00FF">BANGO</text>
+        </svg>
+      </a>
+
+      <!-- Main Heading Link -->
+      <a href="https://bangodesign.cloud" class="hero-title-link">
+        <h1>BANGODESIGN<span>.cloud</span></h1>
+      </a>
+      <p>AI-powered creativity for campaigns that inspire and win. Plan. Design. Write. Launch. All in one unified marketing workspace built for modern creators.</p>
+      
+      <!-- Launch Badge Link -->
+      <a href="https://bangodesign.cloud" class="launch-date-container">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span>Launching 1st August 2026</span>
+      </a>
+
+      <div>
+        <button class="btn-lg open-waitlist-btn">
+          Join the Waitlist &rarr;
+        </button>
+      </div>
+    </div>
+
+    <!-- Hero Right Column: SaaS Campaign Generation Wizard UI Mockup -->
+    <div class="hero-right">
+      <div class="workspace-window">
+        
+        <!-- Window Bar -->
+        <div class="window-header">
+          <div class="window-dot dot-red"></div>
+          <div class="window-dot dot-yellow"></div>
+          <div class="window-dot dot-green"></div>
+          <span class="window-title-text">Bango Campaign Generator — Step 1 of 16</span>
+        </div>
+
+        <div class="window-body">
+          
+          <!-- Left Sidebar: Progress Steps Tracker -->
+          <div class="step-sidebar">
+            <span class="panel-heading-text">Workflow</span>
+            
+            <div class="step-item active">
+              <span class="step-num">Step 01</span>
+              <span>Candidate</span>
+              <span class="step-status">Active</span>
+            </div>
+            
+            <div class="step-item">
+              <span class="step-num">Step 02</span>
+              <span>Location</span>
+            </div>
+            
+            <div class="step-item">
+              <span class="step-num">Step 03</span>
+              <span>Slogan & CTA</span>
+            </div>
+            
+            <div class="step-item">
+              <span class="step-num">Step 04</span>
+              <span>Agenda</span>
+            </div>
+
+            <div class="step-item">
+              <span class="step-num">Step 05</span>
+              <span>Image Upload</span>
+            </div>
+          </div>
+
+          <!-- Center Canvas Area: Conversational AI Assistant Wizard -->
+          <div class="wizard-canvas-area">
+            <div class="canvas-glow-blob"></div>
+            
+            <div class="assistant-card">
+              <!-- AI Chat Prompt Question -->
+              <div class="assistant-bubble">
+                Hey there! Let's start with your basic info. What is your <strong>Name, Position, and Political Party?</strong>
+              </div>
+
+              <!-- Typing User Response Field -->
+              <div class="assistant-input-box">
+                <span>George Lagat, MP, UDA</span>
+                <div class="typed-cursor"></div>
+              </div>
+
+              <!-- Next Button CTA -->
+              <button class="wizard-next-btn">Next Step &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Right Sidebar: Live Price & Budget Estimator -->
+          <div class="pricing-panel">
+            <span class="panel-heading-text">Estimator</span>
+            
+            <div class="calculator-block">
+              <div class="calc-row">
+                <span>Base Price</span>
+                <span>KES 250</span>
+              </div>
+              
+              <div class="calc-row">
+                <span>Add-ons</span>
+                <span class="green-p">KES 0</span>
+              </div>
+
+              <div class="calc-row">
+                <span>Output</span>
+                <span>Digital</span>
+              </div>
+              
+              <div class="calc-row total">
+                <span>Total</span>
+                <span>KES 250</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Features Grid -->
+  <section class="features-section">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background: rgba(238, 242, 255, 0.8); color: #4F46E5;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+          </svg>
+        </div>
+        <h3>AI Design Studio</h3>
+        <p>Generate highly-optimized brand designs and creative canvas layouts in real-time.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background: rgba(239, 246, 255, 0.8); color: #2563EB;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+        </div>
+        <h3>AI Content Writer</h3>
+        <p>Write high-converting advertising copies, headings, and newsletters customized for your audience.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background: rgba(245, 243, 255, 0.8); color: #7C3AED;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+          </svg>
+        </div>
+        <h3>Campaign Strategy</h3>
+        <p>Derive complete launch structures and actionable roadmaps calibrated for peak response.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background: rgba(236, 253, 245, 0.8); color: #059669;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 20V10M12 20V4M6 20v-6"></path>
+          </svg>
+        </div>
+        <h3>Smart Analytics</h3>
+        <p>Track engagement, reach, and user conversion ratios across networks under one console.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Countdown Section -->
+  <section class="countdown-section">
+    <div class="countdown-title">Countdown to Launch</div>
+    <div class="countdown-grid" id="countdown">
+      <div class="countdown-item">
+        <span class="countdown-number" id="days">00</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <div class="countdown-divider">:</div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="hours">00</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <div class="countdown-divider">:</div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="minutes">00</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+      <div class="countdown-divider">:</div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="seconds">00</span>
+        <span class="countdown-label">Seconds</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Bango Design. All rights reserved.</p>
+  </footer>
+
+  <!-- Modal Overlay / Form -->
+  <div class="modal-overlay" id="waitlist-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="close-modal-btn">&times;</button>
+      
+      <div class="modal-header">
+        <h2>Join the Waitlist</h2>
+        <p>Submit your details to secure priority early access for our launch.</p>
+      </div>
+
+      <!-- Replace YOUR_FORMSPREE_FORM_ID with the key generated in Formspree -->
+      <form id="waitlist-form" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID" method="POST">
+        <div class="form-group">
+          <label for="user-name">Your Name</label>
+          <input type="text" id="user-name" name="name" class="form-input" placeholder="Alex Carter" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="user-email">Email Address</label>
+          <input type="email" id="user-email" name="email" class="form-input" placeholder="name@domain.com" required autocomplete="email">
+        </div>
+        <button type="submit" class="btn-submit">Secure Priority Access</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Countdown Target Date Settings (August 1st, 2026)
+    const LAUNCH_DATE = new Date("August 1, 2026 00:00:00").getTime();
+
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    
+    const modal = document.getElementById('waitlist-modal');
+    const openModalBtns = document.querySelectorAll('.open-waitlist-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = LAUNCH_DATE - now;
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = "<div style='font-size: 1.5rem; font-weight: 800; color: var(--primary)'>WE ARE LIVE!</div>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.textContent = String(days).padStart(2, '0');
+      hoursEl.textContent = String(hours).padStart(2, '0');
+      minutesEl.textContent = String(minutes).padStart(2, '0');
+      secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Modal Interaction
+    openModalBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modal.classList.add('active');
+      });
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
