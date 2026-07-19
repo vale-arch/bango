@@ -59,7 +59,6 @@
       pointer-events: none;
     }
 
-    /* Giant Vibrant Blurred Light Blobs */
     .jitter-blob-1 {
       position: absolute;
       top: -10%;
@@ -108,7 +107,6 @@
       100% { transform: translate(-40px, 20px) scale(0.9); }
     }
 
-    /* High-contrast noise film grain overlay (Jitter Style) */
     .jitter-noise-overlay {
       position: fixed;
       inset: 0;
@@ -137,7 +135,6 @@
       z-index: 10;
     }
 
-    /* Linkable Logo container */
     .logo-container {
       display: flex;
       align-items: center;
@@ -147,9 +144,10 @@
     }
 
     .header-logo-img {
-      height: 48px; /* Standardized height */
+      height: 48px;
       width: auto;
       object-fit: contain;
+      display: none; /* Controlled by JavaScript load checker */
     }
 
     .logo-container span {
@@ -193,7 +191,6 @@
       text-align: left;
     }
 
-    /* Heading Anchor Link */
     .hero-title-link {
       text-decoration: none;
       color: inherit;
@@ -206,7 +203,7 @@
     }
 
     .hero-left h1 {
-      font-size: 3.25rem;
+      font-size: clamp(2.25rem, 6vw, 3.25rem); /* Clamp layout prevents header wrapping on mid-size screens */
       font-weight: 850;
       letter-spacing: -0.03em;
       margin-bottom: 0.75rem;
@@ -228,7 +225,6 @@
       line-height: 1.5;
     }
 
-    /* Linkable Hero Logo container */
     .brand-logo-showcase {
       display: inline-flex;
       justify-content: flex-start;
@@ -242,7 +238,6 @@
       opacity: 0.85;
     }
 
-    /* Linkable Launch Date container */
     .launch-date-container {
       display: inline-flex;
       align-items: center;
@@ -310,7 +305,6 @@
       position: relative;
     }
 
-    /* OS Controls Header */
     .window-header {
       height: 36px;
       background: rgba(255, 255, 255, 0.5);
@@ -339,7 +333,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* Layout Columns */
     .window-body {
       display: grid;
       grid-template-columns: 100px 1fr 100px;
@@ -347,7 +340,6 @@
       height: calc(100% - 36px);
     }
 
-    /* Left Sidebar: Progress Steps Tracker */
     .step-sidebar {
       background: rgba(255, 255, 255, 0.4);
       border-right: 1px solid var(--border-color);
@@ -381,7 +373,6 @@
     .step-num { font-size: 6px; text-transform: uppercase; opacity: 0.7; margin-bottom: 1px; }
     .step-status { font-size: 5.5px; font-weight: 800; text-transform: uppercase; color: #10B981; margin-top: 1px; }
 
-    /* Center Section: Wizard Assistant Canvas */
     .wizard-canvas-area {
       position: relative;
       background: #FFFFFF;
@@ -392,7 +383,6 @@
       justify-content: flex-start;
     }
 
-    /* Background Glowing Blob strictly inside the canvas area */
     .canvas-glow-blob {
       position: absolute;
       width: 140px;
@@ -406,7 +396,6 @@
       pointer-events: none;
     }
 
-    /* Wizard Content styling */
     .assistant-card {
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid var(--border-color);
@@ -430,7 +419,6 @@
       line-height: 1.3;
     }
 
-    /* Typing Input Field representation for Step 1 */
     .assistant-input-box {
       border: 1.5px solid var(--primary);
       border-radius: 6px;
@@ -468,7 +456,6 @@
       cursor: pointer;
     }
 
-    /* Right Sidebar: Real-Time Price Estimator */
     .pricing-panel {
       background: rgba(255, 255, 255, 0.4);
       border-left: 1px solid var(--border-color);
@@ -754,6 +741,7 @@
       box-shadow: 0 4px 12px rgba(0, 82, 255, 0.15);
     }
 
+    /* Mobile media query */
     @media (max-width: 1024px) {
       .hero-container {
         grid-template-columns: 1fr;
@@ -774,14 +762,29 @@
     }
 
     @media (max-width: 640px) {
-      /* Compress the hero left padding on phones */
+      /* Compress layout paddings on phone views */
       .hero-container {
         padding: 1rem 1rem 2rem 1rem !important;
         gap: 1.5rem !important;
       }
 
+      header {
+        border-radius: 16px;
+        margin: 0.5rem auto 0 auto;
+        padding: 0.75rem 1rem;
+      }
+
+      /* Hide redundant launch badge inside the header on mobile to prevent overflow and wrapping issues */
+      .launch-badge-header {
+        display: none !important;
+      }
+
+      /* Ensure the logo container behaves correctly on narrow screens */
+      .logo-container span {
+        font-size: 1.35rem !important;
+      }
+
       .hero-left h1 {
-        font-size: 2.25rem !important;
         margin-bottom: 0.5rem !important;
       }
 
@@ -794,15 +797,15 @@
       .workspace-window {
         max-width: 100%;
         height: auto !important; /* Allow height to adapt nicely */
-        min-height: 300px;
+        min-height: 200px;
       }
 
       .window-body {
-        grid-template-columns: 1fr !important; /* Collapse to 1 column */
+        grid-template-columns: 1fr !important; /* Collapse grid to 1 column */
       }
 
-      /* Hide the narrow sidebars to prevent squishing on narrow screens */
-      .step-sidebar, .pricing-panel {
+      /* Hide sidebars inside the mockup container on mobile to prevent squishing */
+      .step-sidebar, .pricing-panel, .window-title-text {
         display: none !important;
       }
 
@@ -812,6 +815,17 @@
 
       .assistant-card {
         margin-top: 0 !important;
+      }
+
+      .countdown-grid {
+        gap: 0.5rem;
+      }
+      .countdown-item {
+        padding: 0.75rem 0.4rem;
+        min-width: 65px;
+      }
+      .countdown-number {
+        font-size: 1.75rem;
       }
     }
   </style>
@@ -834,7 +848,7 @@
     <a href="https://bangodesign.cloud" class="logo-container">
       
       <!-- SWAPPABLE LOGO PNG: Upload "logo.png" to your directory and this image will render dynamically -->
-      <img class="header-logo-img" src="./logo.png" alt="Bango Design Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <img class="header-logo-img" src="./logo.png" alt="Bango Design Logo">
       
       <!-- Modern Inline Fallback Vector (Will render if logo.png is missing) -->
       <svg width="200" height="48" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: -4px; display: none;">
@@ -873,9 +887,9 @@
       <a href="https://bangodesign.cloud" class="brand-logo-showcase">
         
         <!-- SWAPPABLE HERO LOGO PNG: Automatically swaps with logo.png when available -->
-        <img class="header-logo-img" style="height: 72px;" src="./logo.png" alt="Bango Design Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <img class="header-logo-img" style="height: 72px;" src="./logo.png" alt="Bango Design Logo">
         
-        <!-- Fallback Vector Representation -->
+        <!-- Fallback Vector Representation (Updated coordinates to avoid design overlap) -->
         <svg width="340" height="150" viewBox="0 0 340 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
           <defs>
             <linearGradient id="mainNibGrad" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -896,7 +910,8 @@
             <path d="M 65 -25 L 75 -15 L 75 15 L 65 25 Z" fill="#000" />
           </g>
           
-          <text x="178" y="88" font-family="inherit" font-weight="700" font-size="14" letter-spacing="5" fill="#1E293B">DESIGN</text>
+          <!-- Shifted layout positioning of typography protects letter layers on all screen sizes -->
+          <text x="175" y="112" font-family="inherit" font-weight="700" font-size="13" letter-spacing="5" fill="#1E293B">DESIGN</text>
           <text x="48" y="146" font-family="inherit" font-weight="800" font-size="52" letter-spacing="3.5" fill="#8A00FF">BANGO</text>
         </svg>
       </a>
@@ -1129,6 +1144,32 @@
   </div>
 
   <script>
+    // Asset Fallback Configuration (JavaScript levels execution verifies local/GitHub logo.png availability dynamically)
+    window.addEventListener('DOMContentLoaded', () => {
+      const logoImgs = document.querySelectorAll('.header-logo-img');
+      logoImgs.forEach(img => {
+        img.onload = () => {
+          img.style.display = 'inline-block';
+          if (img.nextElementSibling) {
+            img.nextElementSibling.style.display = 'none';
+          }
+        };
+        img.onerror = () => {
+          img.style.display = 'none';
+          if (img.nextElementSibling) {
+            img.nextElementSibling.style.display = 'inline-block';
+          }
+        };
+        if (img.complete) {
+          if (img.naturalWidth > 0) {
+            img.onload();
+          } else {
+            img.onerror();
+          }
+        }
+      });
+    });
+
     // Countdown Target Date Settings (August 1st, 2026)
     const LAUNCH_DATE = new Date("August 1, 2026 00:00:00").getTime();
 
