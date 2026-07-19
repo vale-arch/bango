@@ -135,6 +135,7 @@
       z-index: 10;
     }
 
+    /* Linkable Logo container */
     .logo-container {
       display: flex;
       align-items: center;
@@ -143,18 +144,17 @@
       color: inherit;
     }
 
-    .header-logo-img {
-      height: 48px;
-      width: auto;
-      object-fit: contain;
-      display: none; /* Controlled by JavaScript load checker */
-    }
-
     .logo-container span {
       font-weight: 800;
       font-size: 1.75rem;
       color: var(--primary);
       line-height: 1;
+    }
+
+    .header-logo-svg {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
     }
 
     .btn-sm {
@@ -191,6 +191,7 @@
       text-align: left;
     }
 
+    /* Heading Anchor Link */
     .hero-title-link {
       text-decoration: none;
       color: inherit;
@@ -203,7 +204,7 @@
     }
 
     .hero-left h1 {
-      font-size: clamp(2.25rem, 6vw, 3.25rem); /* Clamp layout prevents header wrapping on mid-size screens */
+      font-size: clamp(2.15rem, 6vw, 3.25rem); /* Prevents layout wrapping on phone screens */
       font-weight: 850;
       letter-spacing: -0.03em;
       margin-bottom: 0.75rem;
@@ -225,6 +226,7 @@
       line-height: 1.5;
     }
 
+    /* Linkable Hero Logo container */
     .brand-logo-showcase {
       display: inline-flex;
       justify-content: flex-start;
@@ -234,10 +236,17 @@
       transition: opacity 0.2s ease;
     }
 
+    .brand-logo-showcase svg {
+      width: 100%;
+      max-width: 320px; /* Considerably increased size */
+      height: auto;
+    }
+
     .brand-logo-showcase:hover {
       opacity: 0.85;
     }
 
+    /* Linkable Launch Date container */
     .launch-date-container {
       display: inline-flex;
       align-items: center;
@@ -305,6 +314,7 @@
       position: relative;
     }
 
+    /* OS Controls Header */
     .window-header {
       height: 36px;
       background: rgba(255, 255, 255, 0.5);
@@ -333,6 +343,7 @@
       letter-spacing: 0.05em;
     }
 
+    /* Layout Columns */
     .window-body {
       display: grid;
       grid-template-columns: 100px 1fr 100px;
@@ -340,6 +351,7 @@
       height: calc(100% - 36px);
     }
 
+    /* Left Sidebar: Progress Steps Tracker */
     .step-sidebar {
       background: rgba(255, 255, 255, 0.4);
       border-right: 1px solid var(--border-color);
@@ -373,6 +385,7 @@
     .step-num { font-size: 6px; text-transform: uppercase; opacity: 0.7; margin-bottom: 1px; }
     .step-status { font-size: 5.5px; font-weight: 800; text-transform: uppercase; color: #10B981; margin-top: 1px; }
 
+    /* Center Section: Wizard Assistant Canvas */
     .wizard-canvas-area {
       position: relative;
       background: #FFFFFF;
@@ -383,6 +396,7 @@
       justify-content: flex-start;
     }
 
+    /* Background Glowing Blob strictly inside the canvas area */
     .canvas-glow-blob {
       position: absolute;
       width: 140px;
@@ -396,6 +410,7 @@
       pointer-events: none;
     }
 
+    /* Wizard Content styling */
     .assistant-card {
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid var(--border-color);
@@ -419,6 +434,7 @@
       line-height: 1.3;
     }
 
+    /* Typing Input Field representation for Step 1 */
     .assistant-input-box {
       border: 1.5px solid var(--primary);
       border-radius: 6px;
@@ -456,6 +472,7 @@
       cursor: pointer;
     }
 
+    /* Right Sidebar: Real-Time Price Estimator */
     .pricing-panel {
       background: rgba(255, 255, 255, 0.4);
       border-left: 1px solid var(--border-color);
@@ -741,7 +758,6 @@
       box-shadow: 0 4px 12px rgba(0, 82, 255, 0.15);
     }
 
-    /* Mobile media query */
     @media (max-width: 1024px) {
       .hero-container {
         grid-template-columns: 1fr;
@@ -761,8 +777,8 @@
       }
     }
 
+    /* Mobile media query */
     @media (max-width: 640px) {
-      /* Compress layout paddings on phone views */
       .hero-container {
         padding: 1rem 1rem 2rem 1rem !important;
         gap: 1.5rem !important;
@@ -774,12 +790,12 @@
         padding: 0.75rem 1rem;
       }
 
-      /* Hide redundant launch badge inside the header on mobile to prevent overflow and wrapping issues */
+      /* Hide secondary header launch date to fit elements cleanly in mobile view */
       .launch-badge-header {
         display: none !important;
       }
 
-      /* Ensure the logo container behaves correctly on narrow screens */
+      /* Align logo cleanly on small phone screens */
       .logo-container span {
         font-size: 1.35rem !important;
       }
@@ -793,18 +809,17 @@
         margin-bottom: 1rem !important;
       }
 
-      /* Simplify the SaaS Window Grid for Mobile */
+      /* Simplify mockup panel to 1 column to prevent horizontal layout squishing on mobile */
       .workspace-window {
         max-width: 100%;
-        height: auto !important; /* Allow height to adapt nicely */
+        height: auto !important;
         min-height: 200px;
       }
 
       .window-body {
-        grid-template-columns: 1fr !important; /* Collapse grid to 1 column */
+        grid-template-columns: 1fr !important;
       }
 
-      /* Hide sidebars inside the mockup container on mobile to prevent squishing */
       .step-sidebar, .pricing-panel, .window-title-text {
         display: none !important;
       }
@@ -847,32 +862,70 @@
   <header>
     <a href="https://bangodesign.cloud" class="logo-container">
       
-      <!-- SWAPPABLE LOGO PNG: Upload "logo.png" to your directory and this image will render dynamically -->
+      <!-- SWAPPABLE LOGO PNG: Automatically swaps if logo.png is loaded in folder -->
       <img class="header-logo-img" src="./logo.png" alt="Bango Design Logo">
       
-      <!-- Modern Inline Fallback Vector (Will render if logo.png is missing) -->
-      <svg width="200" height="48" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: -4px; display: none;">
+      <!-- Your Custom Embedded Vector Logo (Header Version) -->
+      <svg class="header-logo-svg" width="200" height="48" viewBox="0 0 1720.07 1116.86" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="headerNibGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#FF3B9F" />
-            <stop offset="100%" stop-color="#8A00FF" />
+          <style>
+            .h-cls-1 { fill: none; }
+            .h-cls-2 { fill: url(#h-linear-gradient-2); fill-rule: evenodd; }
+            .h-cls-3 { fill-rule: evenodd; fill: #6f00ff; }
+            .h-cls-4 { fill-rule: evenodd; fill: url(#h-linear-gradient); }
+            .h-cls-5 { letter-spacing: 0em; }
+            .h-cls-6 { fill: url(#h-linear-gradient-4); }
+            .h-cls-7 { fill: #6f00ff; stroke: #000; stroke-miterlimit: 10; stroke-width: 8px; }
+            .h-cls-8 { fill: #6b7280; }
+            .h-cls-9 { fill: #6b7280; font-family: SourceSerif4Roman-Regular, 'Source Serif 4'; font-size: 106.65px; font-variation-settings: 'wght' 400, 'opsz' 20; }
+            .h-cls-10 { fill: url(#h-linear-gradient-3); stroke: #000; stroke-miterlimit: 10; stroke-width: 5px; }
+            .h-cls-11 { clip-path: url(#h-clippath-1); }
+            .h-cls-12 { clip-path: url(#h-clippath-2); }
+            .h-cls-13 { fill: #ff2dd1; }
+            .h-cls-14 { fill: #0f1015; }
+            .h-cls-15 { letter-spacing: 0em; }
+            .h-cls-16 { clip-path: url(#h-clippath); }
+          </style>
+          <clipPath id="h-clippath">
+            <rect class="h-cls-1" x="1046.72" y="594.46" width="403.5" height="398.1"/>
+          </clipPath>
+          <linearGradient id="h-linear-gradient" x1="1047.24" y1="793.51" x2="1450.24" y2="793.51" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ff2dd1"/>
+            <stop offset="1" stop-color="#6f00ff"/>
           </linearGradient>
+          <clipPath id="h-clippath-1">
+            <rect class="h-cls-1" x="1045.48" y="675.46" width="162.69" height="263.19"/>
+          </clipPath>
+          <linearGradient id="h-linear-gradient-2" x1="1068.43" y1="856.43" x2="1325.04" y2="856.43" xlink:href="#h-linear-gradient"/>
+          <linearGradient id="h-linear-gradient-3" x1="723.28" y1="703.81" x2="785.01" y2="703.81" xlink:href="#h-linear-gradient"/>
+          <linearGradient id="h-linear-gradient-4" x1="1208.49" y1="328.17" x2="1611.77" y2="328.17" xlink:href="#h-linear-gradient"/>
+          <clipPath id="h-clippath-2">
+            <rect class="h-cls-1" x="1476.95" y="51.84" width="211.79" height="210.55"/>
+          </clipPath>
         </defs>
-        <path d="M 6 34 L 22 12 L 36 29" stroke="#000" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
-        <circle cx="6" cy="34" r="2.5" fill="#D250FF" stroke="#000" stroke-width="1.2" />
-        <circle cx="22" cy="12" r="2.5" fill="#8A00FF" stroke="#000" stroke-width="1.2" />
-        <circle cx="36" cy="29" r="2.5" fill="#FF3B9F" stroke="#000" stroke-width="1.2" />
-        <g transform="translate(36, 29) rotate(-30) scale(0.48)">
-          <path d="M 0 0 L 25 -15 L 55 -15 L 65 -25 L 75 -15 L 75 15 L 65 25 L 55 15 L 25 15 Z" fill="url(#headerNibGrad)" stroke="#000" stroke-width="2" />
-          <line x1="0" y1="0" x2="35" y2="0" stroke="#000" stroke-width="2" />
-          <circle cx="35" cy="0" r="6" fill="#FFF" stroke="#000" stroke-width="2" />
-          <path d="M 65 -25 L 75 -15 L 75 15 L 65 25 Z" fill="#000" />
+        <path class="h-cls-14" d="M243.54,821.71c0-23.17,4.61-43.72,13.86-61.65,9.26-17.94,21.81-31.74,37.67-41.4,15.87-9.65,33.6-14.48,53.18-14.48,17.11,0,32.09,3.46,44.92,10.37,12.83,6.89,23.1,15.58,30.82,26.06v-32.69h58.37v229.29h-58.37v-33.52c-7.45,10.76-17.72,19.66-30.82,26.71-13.11,7.02-28.22,10.54-45.34,10.54-19.31,0-36.9-4.96-52.77-14.89-15.85-9.95-28.41-23.96-37.67-42.02-9.24-18.08-13.86-38.85-13.86-62.31ZM424,822.54c0-14.05-2.76-26.11-8.29-36.18-5.51-10.09-12.95-17.81-22.32-23.19-9.38-5.39-19.45-8.09-30.2-8.09s-20.73,2.63-29.82,7.88c-9.11,5.24-16.48,12.89-22.15,22.98-5.65,10.07-8.47,22-8.47,35.77s2.82,25.88,8.47,36.25c5.67,10.35,13.11,18.28,22.36,23.81,9.24,5.51,19.11,8.26,29.62,8.26s20.82-2.68,30.2-8.05c9.37-5.39,16.81-13.11,22.32-23.19,5.53-10.09,8.29-22.17,8.29-36.25Z"/>
+        <path class="h-cls-14" d="M645.42,704.6c27.32,0,49.39,8.63,66.21,25.88,16.84,17.24,25.26,41.3,25.26,72.19v134.53h-57.95v-126.65c0-18.19-4.55-32.19-13.65-41.99-9.11-9.81-21.52-14.72-37.25-14.72s-28.61,4.91-37.87,14.72c-9.24,9.8-13.86,23.79-13.86,41.99v126.65h-57.95v-229.29h57.95v28.54c7.74-9.93,17.61-17.71,29.62-23.36,12-5.67,25.17-8.5,39.5-8.5Z"/>
+        <path class="h-cls-14" d="M861.04,704.18c17.11,0,32.16,3.39,45.13,10.16,12.97,6.76,23.17,15.51,30.62,26.26v-32.69h58.37v230.94c0,21.24-4.29,40.2-12.86,56.88-8.55,16.7-21.38,29.94-38.5,39.74-17.1,9.81-37.79,14.72-62.06,14.72-32.55,0-59.26-7.59-80.1-22.77-20.83-15.19-32.61-35.89-35.35-62.1h57.5c3.04,10.51,9.59,18.85,19.66,25.05,10.09,6.22,22.3,9.33,36.63,9.33,16.84,0,30.5-5.05,40.98-15.14,10.48-10.07,15.72-25.31,15.72-45.72v-35.59c-7.45,10.76-17.72,19.73-30.82,26.92-13.11,7.16-28.09,10.75-44.92,10.75-19.31,0-36.97-4.96-52.98-14.89-15.99-9.95-28.61-23.96-37.87-42.02-9.24-18.08-13.86-38.85-13.86-62.31s4.61-43.72,13.86-61.65c9.26-17.94,21.81-31.74,37.67-41.4,15.87-9.65,33.6-14.48,53.18-14.48ZM936.79,822.54c0-14.05-2.76-26.11-8.29-36.18-5.51-10.09-12.95-17.81-22.32-23.19-9.38-5.39-19.45-8.09-30.2-8.09s-20.73,2.63-29.82,7.88c-9.11,5.24-16.48,12.89-22.15,22.98-5.65,10.07-8.47,22-8.47,35.77s2.82,25.88,8.47,36.25c5.67,10.35,13.11,18.28,22.36,23.81,9.24,5.51,19.11,8.26,29.62,8.26s20.82-2.68,30.2-8.05c9.37-5.39,16.81-13.11,22.32-23.19,5.53-10.09,8.29-22.17,8.29-36.25Z"/>
+        <g>
+          <path class="h-cls-8" d="M1097.88,1049.68c0-6.89,1.39-12.93,4.18-18.14,2.78-5.2,6.62-9.24,11.51-12.09,4.88-2.88,10.35-4.32,16.41-4.32,5.25,0,10.13,1.21,14.65,3.63,4.51,2.42,7.96,5.6,10.33,9.54v-35.66h11.3v91.02h-11.3v-12.68c-2.21,4.03-5.49,7.34-9.85,9.92-4.35,2.58-9.43,3.87-15.24,3.87s-11.43-1.47-16.31-4.42c-4.89-2.95-8.73-7.08-11.51-12.41-2.79-5.34-4.18-11.42-4.18-18.25ZM1154.97,1049.82c0-5.09-1.03-9.51-3.08-13.27-2.06-3.78-4.83-6.67-8.33-8.67-3.48-2.02-7.31-3.04-11.47-3.04s-8.02.99-11.47,2.97c-3.44,1.96-6.18,4.83-8.22,8.6-2.06,3.78-3.08,8.21-3.08,13.27s1.02,9.69,3.08,13.51c2.05,3.8,4.79,6.7,8.22,8.71,3.46,2,7.27,3.01,11.47,3.01s7.99-1,11.47-3.01c3.5-2,6.27-4.91,8.33-8.71,2.05-3.82,3.08-8.28,3.08-13.37Z"/>
+          <path class="h-cls-8" d="M1246.73,1047.36c0,2.13-.13,4.38-.38,6.77h-53.87c.41,6.63,2.7,11.82,6.84,15.55s9.17,5.6,15.07,5.6c4.84,0,8.86-1.12,12.09-3.39,3.25-2.25,5.53-5.27,6.84-9.05h12.06c-1.8,6.5-5.41,11.78-10.82,15.83-5.42,4.06-12.15,6.08-20.18,6.08-6.41,0-12.13-1.43-17.17-4.29-5.05-2.88-9.01-6.95-11.89-12.23-2.86-5.3-4.29-11.44-4.29-18.42s1.39-13.08,4.18-18.32c2.78-5.25,6.7-9.3,11.75-12.13s10.85-4.25,17.42-4.25,12.06,1.4,16.97,4.18c4.92,2.79,8.72,6.63,11.37,11.51,2.67,4.89,4.01,10.4,4.01,16.55ZM1235.15,1045.01c0-4.26-.95-7.92-2.83-10.99-1.87-3.08-4.42-5.43-7.67-7.02-3.25-1.61-6.83-2.42-10.75-2.42-5.67,0-10.5,1.81-14.48,5.43-3.97,3.59-6.24,8.6-6.81,15h42.54Z"/>
+          <path class="h-cls-8" d="M1285.36,1084.75c-5.18,0-9.83-.88-13.93-2.63-4.1-1.77-7.34-4.23-9.71-7.4-2.38-3.15-3.69-6.78-3.94-10.89h11.58c.32,3.37,1.9,6.12,4.73,8.26,2.83,2.13,6.54,3.18,11.13,3.18,4.26,0,7.62-.94,10.09-2.83,2.46-1.88,3.7-4.26,3.7-7.12s-1.31-5.17-3.94-6.6c-2.63-1.43-6.69-2.84-12.16-4.25-5.03-1.31-9.11-2.63-12.27-3.97-3.16-1.36-5.87-3.37-8.12-6.05-2.26-2.67-3.39-6.17-3.39-10.51,0-3.46,1.02-6.61,3.08-9.47,2.05-2.88,4.96-5.16,8.74-6.84,3.78-1.68,8.09-2.52,12.92-2.52,7.46,0,13.49,1.89,18.07,5.67,4.6,3.78,7.07,8.94,7.4,15.48h-11.2c-.26-3.52-1.68-6.34-4.25-8.47-2.58-2.14-6.05-3.21-10.4-3.21-4.01,0-7.21.86-9.61,2.59-2.38,1.73-3.56,3.99-3.56,6.77,0,2.21.71,4.03,2.14,5.46,1.45,1.43,3.26,2.58,5.43,3.46,2.19.86,5.2,1.82,9.05,2.9,4.84,1.3,8.78,2.58,11.82,3.87,3.04,1.27,5.64,3.18,7.81,5.74,2.16,2.54,3.29,5.86,3.39,9.95,0,3.69-1.03,7.01-3.08,9.95-2.06,2.95-4.94,5.27-8.67,6.95-3.73,1.68-8.02,2.52-12.86,2.52Z"/>
+          <path class="h-cls-8" d="M1331.46,1005.27c-2.13,0-3.92-.73-5.39-2.21-1.48-1.47-2.21-3.27-2.21-5.39s.73-3.95,2.21-5.43c1.47-1.47,3.27-2.21,5.39-2.21s3.78.74,5.22,2.21c1.45,1.48,2.18,3.28,2.18,5.43s-.73,3.92-2.18,5.39c-1.43,1.48-3.17,2.21-5.22,2.21ZM1336.89,1016.23v67.42h-11.2v-67.42h11.2Z"/>
+          <path class="h-cls-8" d="M1383.77,1015.12c5.81,0,10.89,1.28,15.27,3.84,4.4,2.54,7.67,5.73,9.81,9.57v-12.3h11.3v68.91c0,6.15-1.31,11.62-3.94,16.41-2.61,4.79-6.35,8.54-11.23,11.23-4.89,2.71-10.57,4.08-17.04,4.08-8.87,0-16.26-2.1-22.15-6.29-5.9-4.17-9.39-9.87-10.47-17.07h11.09c1.22,4.09,3.75,7.4,7.6,9.88,3.87,2.51,8.51,3.77,13.93,3.77,6.15,0,11.17-1.94,15.07-5.81,3.89-3.85,5.84-9.25,5.84-16.21v-14.17c-2.21,3.94-5.49,7.22-9.85,9.85-4.35,2.63-9.43,3.94-15.24,3.94s-11.43-1.47-16.31-4.42c-4.89-2.95-8.73-7.08-11.51-12.41-2.79-5.34-4.18-11.42-4.18-18.25s1.39-12.93,4.18-18.14c2.78-5.2,6.62-9.24,11.51-12.09,4.88-2.88,10.32-4.32,16.31-4.32ZM1408.86,1049.82c0-5.09-1.03-9.51-3.08-13.27-2.06-3.78-4.83-6.67-8.33-8.67-3.48-2.02-7.31-3.04-11.47-3.04s-8.02.99-11.47,2.97c-3.44,1.96-6.18,4.83-8.22,8.6-2.06,3.78-3.08,8.21-3.08,13.27s1.02,9.69,3.08,13.51c2.05,3.8,4.79,6.7,8.22,8.71,3.46,2,7.27,3.01,11.47,3.01s7.99-1,11.47-3.01c3.5-2,6.27-4.91,8.33-8.71,2.05-3.82,3.08-8.28,3.08-13.37Z"/>
+          <path class="h-cls-15" d="M1471.96,1015.02c8.2,0,14.83,2.48,19.9,7.43,5.09,4.96,7.64,12.11,7.64,21.46v39.74h-11.06v-38.15c0-6.72-1.68-11.86-5.05-15.41-3.37-3.57-7.97-5.36-13.79-5.36s-10.6,1.85-14.1,5.53c-3.48,3.69-5.22,9.05-5.22,16.1v37.29h-11.2v-67.42h11.2v9.61c2.21-3.46,5.22-6.12,9.02-7.98,3.82-1.88,8.03-2.83,12.65-2.83Z"/>
         </g>
-        <text x="44" y="38" font-family="inherit" font-weight="800" font-size="22" letter-spacing="1.5" fill="#8A00FF">BANGO</text>
-        <text x="122" y="24" font-family="inherit" font-weight="600" font-size="7.5" letter-spacing="2.5" fill="#1E293B">DESIGN</text>
+        <path class="h-cls-13" d="M163.9,789.02c16.28,3.04,29.67,11.19,40.16,24.43,10.48,13.25,15.72,28.42,15.72,45.51,0,15.46-3.8,29.05-11.4,40.78-7.59,11.73-18.55,20.91-32.9,27.54-14.33,6.62-31.3,9.92-50.9,9.92H0v-288.9h119.22c19.58,0,36.47,3.18,50.7,9.54,14.21,6.34,24.97,15.16,32.28,26.47,7.33,11.32,10.99,24.15,10.99,38.5,0,16.85-4.49,30.92-13.48,42.23-8.97,11.32-20.9,19.31-35.8,23.98ZM57.95,767.49h52.98c13.8,0,24.41-3.09,31.86-9.3,7.46-6.22,11.2-15.12,11.2-26.71s-3.73-20.54-11.2-26.89c-7.45-6.36-18.06-9.54-31.86-9.54h-52.98v72.43ZM116.32,890.03c14.07,0,25.04-3.3,32.9-9.92,7.85-6.63,11.78-16.02,11.78-28.16s-4.14-22.13-12.41-29.17c-8.28-7.05-19.45-10.57-33.52-10.57h-57.12v77.82h58.37Z"/>
+        <g class="h-cls-16">
+          <path class="h-cls-4" d="M1298.07,992.46c35.65-9.11,67.39-27.78,92.6-52.94,36.95-36.45,59.56-86.78,59.56-142.32s-22.61-106.31-59.56-143.2c-36.95-36.45-87.38-59.45-143.46-59.45s-106.07,23-142.59,59.45c-30.44,30.81-51.3,71.16-57.38,116.29,32.16-63.35,96.51-96.77,160.85-94.17,12.61-4.33,25.65-6.51,39.13-6.51,35.21,0,66.95,14.32,90.43,37.75,69.12,68.99,40.86,231.71-39.57,285.09"/>
+        </g>
+        <g class="h-cls-11">
+          <path class="h-cls-3" d="M1107.66,755.11c9.56-9.55,20-17.36,31.3-23.43,5.22-9.11,11.74-17.36,19.13-24.73,13.92-13.89,30.87-24.73,50-30.82-64.34-2.6-128.68,30.82-160.85,94.17-1.3,8.67-1.75,17.79-1.75,26.9,0,54.24,21.3,103.27,56.09,139.72-42.61-49.04-47.83-127.58,6.08-181.81"/>
+        </g>
+        <path class="h-cls-2" d="M1138.96,731.68c-11.3,6.07-21.74,13.88-31.3,23.43-53.91,54.24-48.69,132.78-6.08,181.81.86.86,1.74,1.74,3.04,3.03,7.83,7.82,16.09,14.76,25.22,21.26,19.99,12.59,43.9,19.97,70.86,19.97,59.99,0,105.2-36.45,124.34-83.75-21.74,16.48-48.69,26.04-77.82,26.04-34.78,0-66.51-13.88-89.55-36.89-22.6-22.56-36.95-54.24-36.95-89.38,0-23.86,6.52-46.43,18.25-65.52"/>
+        <text class="h-cls-9" transform="translate(968.79 1080.19)"><tspan class="h-cls-15" x="0" y="0">A</tspan><tspan class="h-cls-5" x="69.75" y="0">I</tspan></text>
       </svg>
       <span>.cloud</span>
-    </a>
+    </div>
     <div class="header-right">
       <span class="launch-badge-header">Launching 1st August 2026</span>
       <button class="btn-sm open-waitlist-btn">Join Waitlist</button>
@@ -889,393 +942,427 @@
         <!-- SWAPPABLE HERO LOGO PNG: Automatically swaps with logo.png when available -->
         <img class="header-logo-img" style="height: 72px;" src="./logo.png" alt="Bango Design Logo">
         
-        <!-- Fallback Vector Representation (Updated coordinates to avoid design overlap) -->
-        <svg width="340" height="150" viewBox="0 0 340 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Your Custom Embedded Vector Logo (Hero Version) -->
+        <svg class="hero-logo-svg" width="340" height="220" viewBox="0 0 1720.07 1116.86" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
           <defs>
-            <linearGradient id="mainNibGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#FF3B9F" />
-              <stop offset="100%" stop-color="#8A00FF" />
+            <style>
+              .hr-cls-1 { fill: none; }
+              .hr-cls-2 { fill: url(#hr-linear-gradient-2); fill-rule: evenodd; }
+              .hr-cls-3 { fill-rule: evenodd; fill: #6f00ff; }
+              .hr-cls-4 { fill-rule: evenodd; fill: url(#hr-linear-gradient); }
+              .hr-cls-5 { letter-spacing: 0em; }
+              .hr-cls-6 { fill: url(#hr-linear-gradient-4); }
+              .hr-cls-7 { fill: #6f00ff; stroke: #000; stroke-miterlimit: 10; stroke-width: 8px; }
+              .hr-cls-8 { fill: #6b7280; }
+              .hr-cls-9 { fill: #6b7280; font-family: SourceSerif4Roman-Regular, 'Source Serif 4'; font-size: 106.65px; font-variation-settings: 'wght' 400, 'opsz' 20; }
+              .hr-cls-10 { fill: url(#hr-linear-gradient-3); stroke: #000; stroke-miterlimit: 10; stroke-width: 5px; }
+              .hr-cls-11 { clip-path: url(#hr-clippath-1); }
+              .hr-cls-12 { clip-path: url(#hr-clippath-2); }
+              .hr-cls-13 { fill: #ff2dd1; }
+              .hr-cls-14 { fill: #0f1015; }
+              .hr-cls-15 { letter-spacing: 0em; }
+              .hr-cls-16 { clip-path: url(#hr-clippath); }
+            </style>
+            <clipPath id="hr-clippath">
+              <rect class="hr-cls-1" x="1046.72" y="594.46" width="403.5" height="398.1"/>
+            </clipPath>
+            <linearGradient id="hr-linear-gradient" x1="1047.24" y1="793.51" x2="1450.24" y2="793.51" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#ff2dd1"/>
+              <stop offset="1" stop-color="#6f00ff"/>
             </linearGradient>
+            <clipPath id="hr-clippath-1">
+              <rect class="hr-cls-1" x="1045.48" y="675.46" width="162.69" height="263.19"/>
+            </clipPath>
+            <linearGradient id="hr-linear-gradient-2" x1="1068.43" y1="856.43" x2="1325.04" y2="856.43" xlink:href="#hr-linear-gradient"/>
+            <linearGradient id="hr-linear-gradient-3" x1="723.28" y1="703.81" x2="785.01" y2="703.81" xlink:href="#hr-linear-gradient"/>
+            <linearGradient id="hr-linear-gradient-4" x1="1208.49" y1="328.17" x2="1611.77" y2="328.17" xlink:href="#hr-linear-gradient"/>
+            <clipPath id="hr-clippath-2">
+              <rect class="hr-cls-1" x="1476.95" y="51.84" width="211.79" height="210.55"/>
+            </clipPath>
           </defs>
-          
-          <path d="M 35 110 L 95 30 L 150 100" stroke="#000000" stroke-width="2" stroke-dasharray="4,4" fill="none" />
-          <circle cx="35" cy="110" r="7" fill="#D250FF" stroke="#000" stroke-width="2" />
-          <circle cx="95" cy="30" r="7" fill="#8A00FF" stroke="#000" stroke-width="2" />
-          <circle cx="150" cy="100" r="7" fill="#FF3B9F" stroke="#000" stroke-width="2" />
-          
-          <g transform="translate(150, 100) rotate(-32) scale(1.2)">
-            <path d="M 0 0 L 25 -15 L 55 -15 L 65 -25 L 75 -15 L 75 15 L 65 25 L 55 15 L 25 15 Z" fill="url(#mainNibGrad)" stroke="#000" stroke-width="1.5" />
-            <line x1="0" y1="0" x2="35" y2="0" stroke="#000" stroke-width="1.5" />
-            <circle cx="35" cy="0" r="6" fill="#FFF" stroke="#000" stroke-width="1.5" />
-            <path d="M 65 -25 L 75 -15 L 75 15 L 65 25 Z" fill="#000" />
-          </g>
-          
-          <!-- Shifted layout positioning of typography protects letter layers on all screen sizes -->
-          <text x="175" y="112" font-family="inherit" font-weight="700" font-size="13" letter-spacing="5" fill="#1E293B">DESIGN</text>
-          <text x="48" y="146" font-family="inherit" font-weight="800" font-size="52" letter-spacing="3.5" fill="#8A00FF">BANGO</text>
-        </svg>
-      </a>
+          <path class="hr-cls-14" d="M243.54,821.71c0-23.17,4.61-43.72,13.86-61.65,9.26-17.94,21.81-31.74,37.67-41.4,15.87-9.65,33.6-14.48,53.18-14.48,17.11,0,32.09,3.46,44.92,10.37,12.83,6.89,23.1,15.58,30.82,26.06v-32.69h58.37v229.29h-58.37v-33.52c-7.45,10.76-17.72,19.66-30.82,26.71-13.11,7.02-28.22,10.54-45.34,10.54-19.31,0-36.9-4.96-52.77-14.89-15.85-9.95-28.41-23.96-37.67-42.02-9.24-18.08-13.86-38.85-13.86-62.31ZM424,822.54c0-14.05-2.76-26.11-8.29-36.18-5.51-10.09-12.95-17.81-22.32-23.19-9.38-5.39-19.45-8.09-30.2-8.09s-20.73,2.63-29.82,7.88c-9.11,5.24-16.48,12.89-22.15,22.98-5.65,10.07-8.47,22-8.47,35.77s2.82,25.88,8.47,36.25c5.67,10.35,13.11,18.28,22.36,23.81,9.24,5.51,19.11,8.26,29.62,8.26s20.82-2.68,30.2-8.05c9.37-5.39,16.81-13.11,22.32-23.19,5.53-10.09,8.29-22.17,8.29-36.25Z"/>
+          <path class="hr-cls-14" d="M645.42,704.6c27.32,0,49.39,8.63,66.21,25.88,16.84,17.24,25.26,41.3,25.26,72.19v134.53h-57.95v-126.65c0-18.19-4.55-32.19-13.65-41.99-9.11-9.81-21.52-14.72-37.25-14.72s-28.61,4.91-37.87,14.72c-9.24,9.8-13.86,23.79-13.86,41.99v126.65h-57.95v-229.29h57.95v28.54c7.74-9.93,17.61-17.71,29.62-23.36,12-5.67,25.17-8.5,39.5-8.5Z"/>
+          <path class="hr-cls-14" d="M861.04,704.18c17.11,0,32.16,3.39,45.13,10.16,12.97,6.76,23.17,15.51,30.62,26.26v-32.69h58.37v230.94c0,21.24-4.29,40.2-12.86,56.88-8.55,16.7-21.38,29.94-38.5,39.74-17.1,9.81-37.79,14.72-62.06,14.72-32.55,0-59.26-7.59-80.1-22.77-20.83-15.19-32.61-35.89-35.35-62.1h57.5c3.04,10.51,9.59,18.85,19.66,25.05,10.09,6.22,22.3,9.33,36.63,9.33,16.84,0,30.5-5.05,40.98-15.14,10.48-10.07,15.72-25.31,15.72-45.72v-35.59c-7.45,10.76-17.72,19.73-30.82,26.92-13.11,7.16-28.09,10.75-44.92,10.75-19.31,0-36.97-4.96-52.98-14.89-15.99-9.95-28.61-23.96-37.87-42.02-9.24-18.08-13.86-38.85-13.86-62.31s4.61-43.72,13.86-61.65c9.26-17.94,21.81-31.74,37.67-41.4,15.87-9.65,33.6-14.48,53.18-14.48ZM936.79,822.54c0-14.05-2.76-26.11-8.29-36.18-5.51-10.09-12.95-17.81-22.32-23.19-9.38-5.39-19.45-8.09-30.2-8.09s-20.73,2.63-29.82,7.88c-9.11,5.24-16.48,12.89-22.15,22.98-5.65,10.07-8.47,22-8.47,35.77s2.82,25.88,8.47,36.25c5.67,10.35,13.11,18.28,22.36,23.81,9.24,5.51,19.11,8.26,29.62,8.26s20.82-2.68,30.2-8.05c9.37-5.39,16.81-13.11,22.32-23.19,5.53-10.09,8.29-22.17,8.29-36.25Z"/>
+        <g>
+          <path class="hr-cls-8" d="M1097.88,1049.68c0-6.89,1.39-12.93,4.18-18.14,2.78-5.2,6.62-9.24,11.51-12.09,4.88-2.88,10.35-4.32,16.41-4.32,5.25,0,10.13,1.21,14.65,3.63,4.51,2.42,7.96,5.6,10.33,9.54v-35.66h11.3v91.02h-11.3v-12.68c-2.21,4.03-5.49,7.34-9.85,9.92-4.35,2.58-9.43,3.87-15.24,3.87s-11.43-1.47-16.31-4.42c-4.89-2.95-8.73-7.08-11.51-12.41-2.79-5.34-4.18-11.42-4.18-18.25ZM1154.97,1049.82c0-5.09-1.03-9.51-3.08-13.27-2.06-3.78-4.83-6.67-8.33-8.67-3.48-2.02-7.31-3.04-11.47-3.04s-8.02.99-11.47,2.97c-3.44,1.96-6.18,4.83-8.22,8.6-2.06,3.78-3.08,8.21-3.08,13.27s1.02,9.69,3.08,13.51c2.05,3.8,4.79,6.7,8.22,8.71,3.46,2,7.27,3.01,11.47,3.01s7.99-1,11.47-3.01c3.5-2,6.27-4.91,8.33-8.71,2.05-3.82,3.08-8.28,3.08-13.37Z"/>
+          <path class="hr-cls-8" d="M1246.73,1047.36c0,2.13-.13,4.38-.38,6.77h-53.87c.41,6.63,2.7,11.82,6.84,15.55s9.17,5.6,15.07,5.6c4.84,0,8.86-1.12,12.09-3.39,3.25-2.25,5.53-5.27,6.84-9.05h12.06c-1.8,6.5-5.41,11.78-10.82,15.83-5.42,4.06-12.15,6.08-20.18,6.08-6.41,0-12.13-1.43-17.17-4.29-5.05-2.88-9.01-6.95-11.89-12.23-2.86-5.3-4.29-11.44-4.29-18.42s1.39-13.08,4.18-18.32c2.78-5.25,6.7-9.3,11.75-12.13s10.85-4.25,17.42-4.25,12.06,1.4,16.97,4.18c4.92,2.79,8.72,6.63,11.37,11.51,2.67,4.89,4.01,10.4,4.01,16.55ZM1235.15,1045.01c0-4.26-.95-7.92-2.83-10.99-1.87-3.08-4.42-5.43-7.67-7.02-3.25-1.61-6.83-2.42-10.75-2.42-5.67,0-10.5,1.81-14.48,5.43-3.97,3.59-6.24,8.6-6.81,15h42.54Z"/>
+          <path class="hr-cls-8" d="M1285.36,1084.75c-5.18,0-9.83-.88-13.93-2.63-4.1-1.77-7.34-4.23-9.71-7.4-2.38-3.15-3.69-6.78-3.94-10.89h11.58c.32,3.37,1.9,6.12,4.73,8.26,2.83,2.13,6.54,3.18,11.13,3.18,4.26,0,7.62-.94,10.09-2.83,2.46-1.88,3.7-4.26,3.7-7.12s-1.31-5.17-3.94-6.6c-2.63-1.43-6.69-2.84-12.16-4.25-5.03-1.31-9.11-2.63-12.27-3.97-3.16-1.36-5.87-3.37-8.12-6.05-2.26-2.67-3.39-6.17-3.39-10.51,0-3.46,1.02-6.61,3.08-9.47,2.05-2.88,4.96-5.16,8.74-6.84,3.78-1.68,8.09-2.52,12.92-2.52,7.46,0,13.49,1.89,18.07,5.67,4.6,3.78,7.07,8.94,7.4,15.48h-11.2c-.26-3.52-1.68-6.34-4.25-8.47-2.58-2.14-6.05-3.21-10.4-3.21-4.01,0-7.21.86-9.61,2.59-2.38,1.73-3.56,3.99-3.56,6.77,0,2.21.71,4.03,2.14,5.46,1.45,1.43,3.26,2.58,5.43,3.46,2.19.86,5.2,1.82,9.05,2.9,4.84,1.3,8.78,2.58,11.82,3.87,3.04,1.27,5.64,3.18,7.81,5.74,2.16,2.54,3.29,5.86,3.39,9.95,0,3.69-1.03,7.01-3.08,9.95-2.06,2.95-4.94,5.27-8.67,6.95-3.73,1.68-8.02,2.52-12.86,2.52Z"/>
+          <path class="hr-cls-8" d="M1331.46,1005.27c-2.13,0-3.92-.73-5.39-2.21-1.48-1.47-2.21-3.27-2.21-5.39s.73-3.95,2.21-5.43c1.47-1.47,3.27-2.21,5.39-2.21s3.78.74,5.22,2.21c1.45,1.48,2.18,3.28,2.18,5.43s-.73,3.92-2.18,5.39c-1.43,1.48-3.17,2.21-5.22,2.21ZM1336.89,1016.23v67.42h-11.2v-67.42h11.2Z"/>
+          <path class="hr-cls-8" d="M1383.77,1015.12c5.81,0,10.89,1.28,15.27,3.84,4.4,2.54,7.67,5.73,9.81,9.57v-12.3h11.3v68.91c0,6.15-1.31,11.62-3.94,16.41-2.61,4.79-6.35,8.54-11.23,11.23-4.89,2.71-10.57,4.08-17.04,4.08-8.87,0-16.26-2.1-22.15-6.29-5.9-4.17-9.39-9.87-10.47-17.07h11.09c1.22,4.09,3.75,7.4,7.6,9.88,3.87,2.51,8.51,3.77,13.93,3.77,6.15,0,11.17-1.94,15.07-5.81,3.89-3.85,5.84-9.25,5.84-16.21v-14.17c-2.21,3.94-5.49,7.22-9.85,9.85-4.35,2.63-9.43,3.94-15.24,3.94s-11.43-1.47-16.31-4.42c-4.89-2.95-8.73-7.08-11.51-12.41-2.79-5.34-4.18-11.42-4.18-18.25s1.39-12.93,4.18-18.14c2.78-5.2,6.62-9.24,11.51-12.09,4.88-2.88,10.32-4.32,16.31-4.32ZM1408.86,1049.82c0-5.09-1.03-9.51-3.08-13.27-2.06-3.78-4.83-6.67-8.33-8.67-3.48-2.02-7.31-3.04-11.47-3.04s-8.02.99-11.47,2.97c-3.44,1.96-6.18,4.83-8.22,8.6-2.06,3.78-3.08,8.21-3.08,13.27s1.02,9.69,3.08,13.51c2.05,3.8,4.79,6.7,8.22,8.71,3.46,2,7.27,3.01,11.47,3.01s7.99-1,11.47-3.01c3.5-2,6.27-4.91,8.33-8.71,2.05-3.82,3.08-8.28,3.08-13.37Z"/>
+          <path class="hr-cls-15" d="M1471.96,1015.02c8.2,0,14.83,2.48,19.9,7.43,5.09,4.96,7.64,12.11,7.64,21.46v39.74h-11.06v-38.15c0-6.72-1.68-11.86-5.05-15.41-3.37-3.57-7.97-5.36-13.79-5.36s-10.6,1.85-14.1,5.53c-3.48,3.69-5.22,9.05-5.22,16.1v37.29h-11.2v-67.42h11.2v9.61c2.21-3.46,5.22-6.12,9.02-7.98,3.82-1.88,8.03-2.83,12.65-2.83Z"/>
+        </g>
+        <path class="hr-cls-13" d="M163.9,789.02c16.28,3.04,29.67,11.19,40.16,24.43,10.48,13.25,15.72,28.42,15.72,45.51,0,15.46-3.8,29.05-11.4,40.78-7.59,11.73-18.55,20.91-32.9,27.54-14.33,6.62-31.3,9.92-50.9,9.92H0v-288.9h119.22c19.58,0,36.47,3.18,50.7,9.54,14.21,6.34,24.97,15.16,32.28,26.47,7.33,11.32,10.99,24.15,10.99,38.5,0,16.85-4.49,30.92-13.48,42.23-8.97,11.32-20.9,19.31-35.8,23.98ZM57.95,767.49h52.98c13.8,0,24.41-3.09,31.86-9.3,7.46-6.22,11.2-15.12,11.2-26.71s-3.73-20.54-11.2-26.89c-7.45-6.36-18.06-9.54-31.86-9.54h-52.98v72.43ZM116.32,890.03c14.07,0,25.04-3.3,32.9-9.92,7.85-6.63,11.78-16.02,11.78-28.16s-4.14-22.13-12.41-29.17c-8.28-7.05-19.45-10.57-33.52-10.57h-57.12v77.82h58.37Z"/>
+        <g class="hr-cls-16">
+          <path class="hr-cls-4" d="M1298.07,992.46c35.65-9.11,67.39-27.78,92.6-52.94,36.95-36.45,59.56-86.78,59.56-142.32s-22.61-106.31-59.56-143.2c-36.95-36.45-87.38-59.45-143.46-59.45s-106.07,23-142.59,59.45c-30.44,30.81-51.3,71.16-57.38,116.29,32.16-63.35,96.51-96.77,160.85-94.17,12.61-4.33,25.65-6.51,39.13-6.51,35.21,0,66.95,14.32,90.43,37.75,69.12,68.99,40.86,231.71-39.57,285.09"/>
+        </g>
+        <g class="hr-cls-11">
+          <path class="hr-cls-3" d="M1107.66,755.11c9.56-9.55,20-17.36,31.3-23.43,5.22-9.11,11.74-17.36,19.13-24.73,13.92-13.89,30.87-24.73,50-30.82-64.34-2.6-128.68,30.82-160.85,94.17-1.3,8.67-1.75,17.79-1.75,26.9,0,54.24,21.3,103.27,56.09,139.72-42.61-49.04-47.83-127.58,6.08-181.81"/>
+        </g>
+        <path class="hr-cls-2" d="M1138.96,731.68c-11.3,6.07-21.74,13.88-31.3,23.43-53.91,54.24-48.69,132.78-6.08,181.81.86.86,1.74,1.74,3.04,3.03,7.83,7.82,16.09,14.76,25.22,21.26,19.99,12.59,43.9,19.97,70.86,19.97,59.99,0,105.2-36.45,124.34-83.75-21.74,16.48-48.69,26.04-77.82,26.04-34.78,0-66.51-13.88-89.55-36.89-22.6-22.56-36.95-54.24-36.95-89.38,0-23.86,6.52-46.43,18.25-65.52"/>
+        <text class="hr-cls-9" transform="translate(968.79 1080.19)"><tspan class="hr-cls-15" x="0" y="0">A</tspan><tspan class="hr-cls-5" x="69.75" y="0">I</tspan></text>
+      </svg>
+    </a>
 
-      <!-- Main Heading Link -->
-      <a href="https://bangodesign.cloud" class="hero-title-link">
-        <h1>BANGODESIGN<span>.cloud</span></h1>
-      </a>
-      <p>AI-powered creativity for campaigns that inspire and win. Plan. Design. Write. Launch. All in one unified marketing workspace built for modern creators.</p>
-      
-      <!-- Launch Badge Link -->
-      <a href="https://bangodesign.cloud" class="launch-date-container">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
-        <span>Launching 1st August 2026</span>
-      </a>
-
-      <div>
-        <button class="btn-lg open-waitlist-btn">
-          Join the Waitlist &rarr;
-        </button>
-      </div>
-    </div>
-
-    <!-- Hero Right Column: SaaS Campaign Generation Wizard UI Mockup -->
-    <div class="hero-right">
-      <div class="workspace-window">
-        
-        <!-- Window Bar -->
-        <div class="window-header">
-          <div class="window-dot dot-red"></div>
-          <div class="window-dot dot-yellow"></div>
-          <div class="window-dot dot-green"></div>
-          <span class="window-title-text">Bango Campaign Generator — Step 1 of 16</span>
-        </div>
-
-        <div class="window-body">
-          
-          <!-- Left Sidebar: Progress Steps Tracker -->
-          <div class="step-sidebar">
-            <span class="panel-heading-text">Workflow</span>
-            
-            <div class="step-item active">
-              <span class="step-num">Step 01</span>
-              <span>Candidate</span>
-              <span class="step-status">Active</span>
-            </div>
-            
-            <div class="step-item">
-              <span class="step-num">Step 02</span>
-              <span>Location</span>
-            </div>
-            
-            <div class="step-item">
-              <span class="step-num">Step 03</span>
-              <span>Slogan & CTA</span>
-            </div>
-            
-            <div class="step-item">
-              <span class="step-num">Step 04</span>
-              <span>Agenda</span>
-            </div>
-
-            <div class="step-item">
-              <span class="step-num">Step 05</span>
-              <span>Image Upload</span>
-            </div>
-          </div>
-
-          <!-- Center Canvas Area: Conversational AI Assistant Wizard -->
-          <div class="wizard-canvas-area">
-            <div class="canvas-glow-blob"></div>
-            
-            <div class="assistant-card">
-              <!-- AI Chat Prompt Question -->
-              <div class="assistant-bubble">
-                Hey there! Let's start with your basic info. What is your <strong>Name, Position, and Political Party?</strong>
-              </div>
-
-              <!-- Typing User Response Field -->
-              <div class="assistant-input-box">
-                <span>George Lagat, MP, UDA</span>
-                <div class="typed-cursor"></div>
-              </div>
-
-              <!-- Next Button CTA -->
-              <button class="wizard-next-btn">Next Step &rarr;</button>
-            </div>
-          </div>
-
-          <!-- Right Sidebar: Live Price & Budget Estimator -->
-          <div class="pricing-panel">
-            <span class="panel-heading-text">Estimator</span>
-            
-            <div class="calculator-block">
-              <div class="calc-row">
-                <span>Base Price</span>
-                <span>KES 250</span>
-              </div>
-              
-              <div class="calc-row">
-                <span>Add-ons</span>
-                <span class="green-p">KES 0</span>
-              </div>
-
-              <div class="calc-row">
-                <span>Output</span>
-                <span>Digital</span>
-              </div>
-              
-              <div class="calc-row total">
-                <span>Total</span>
-                <span>KES 250</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Features Grid -->
-  <section class="features-section">
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon" style="background: rgba(238, 242, 255, 0.8); color: #4F46E5;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-            <polyline points="2 17 12 22 22 17"></polyline>
-          </svg>
-        </div>
-        <h3>AI Design Studio</h3>
-        <p>Generate highly-optimized brand designs and creative canvas layouts in real-time.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="background: rgba(239, 246, 255, 0.8); color: #2563EB;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-            <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-          </svg>
-        </div>
-        <h3>AI Content Writer</h3>
-        <p>Write high-converting advertising copies, headings, and newsletters customized for your audience.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="background: rgba(245, 243, 255, 0.8); color: #7C3AED;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-          </svg>
-        </div>
-        <h3>Campaign Strategy</h3>
-        <p>Derive complete launch structures and actionable roadmaps calibrated for peak response.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="background: rgba(236, 253, 245, 0.8); color: #059669;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 20V10M12 20V4M6 20v-6"></path>
-          </svg>
-        </div>
-        <h3>Smart Analytics</h3>
-        <p>Track engagement, reach, and user conversion ratios across networks under one console.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Live Countdown Section -->
-  <section class="countdown-section">
-    <div class="countdown-title">Countdown to Launch</div>
-    <div class="countdown-grid" id="countdown">
-      <div class="countdown-item">
-        <span class="countdown-number" id="days">00</span>
-        <span class="countdown-label">Days</span>
-      </div>
-      <div class="countdown-divider">:</div>
-      <div class="countdown-item">
-        <span class="countdown-number" id="hours">00</span>
-        <span class="countdown-label">Hours</span>
-      </div>
-      <div class="countdown-divider">:</div>
-      <div class="countdown-item">
-        <span class="countdown-number" id="minutes">00</span>
-        <span class="countdown-label">Minutes</span>
-      </div>
-      <div class="countdown-divider">:</div>
-      <div class="countdown-item">
-        <span class="countdown-number" id="seconds">00</span>
-        <span class="countdown-label">Seconds</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Bango Design. All rights reserved.</p>
-  </footer>
-
-  <!-- Modal Overlay / Form -->
-  <div class="modal-overlay" id="waitlist-modal">
-    <div class="modal-card">
-      <button class="modal-close" id="close-modal-btn">&times;</button>
-      
-      <div class="modal-header">
-        <h2>Join the Waitlist</h2>
-        <p>Submit your details to secure priority early access for our launch.</p>
-      </div>
-
-      <!-- Replace YOUR_FORMSPREE_FORM_ID with the key generated in Formspree -->
-      <form id="waitlist-form" action="https://formspree.io/f/xpqvdbpl" method="POST">
-        <div class="form-group">
-          <label for="user-name">Your Name</label>
-          <input type="text" id="user-name" name="name" class="form-input" placeholder="Alex Carter" required autocomplete="name">
-        </div>
-        <div class="form-group">
-          <label for="user-email">Email Address</label>
-          <input type="email" id="user-email" name="email" class="form-input" placeholder="name@domain.com" required autocomplete="email">
-        </div>
-        <button type="submit" class="btn-submit">Secure Priority Access</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    // Asset Fallback Configuration (JavaScript levels execution verifies local/GitHub logo.png availability dynamically)
-    window.addEventListener('DOMContentLoaded', () => {
-      const logoImgs = document.querySelectorAll('.header-logo-img');
-      logoImgs.forEach(img => {
-        img.onload = () => {
-          img.style.display = 'inline-block';
-          if (img.nextElementSibling) {
-            img.nextElementSibling.style.display = 'none';
-          }
-        };
-        img.onerror = () => {
-          img.style.display = 'none';
-          if (img.nextElementSibling) {
-            img.nextElementSibling.style.display = 'inline-block';
-          }
-        };
-        if (img.complete) {
-          if (img.naturalWidth > 0) {
-            img.onload();
-          } else {
-            img.onerror();
-          }
-        }
-      });
-    });
-
-    // Countdown Target Date Settings (August 1st, 2026)
-    const LAUNCH_DATE = new Date("August 1, 2026 00:00:00").getTime();
-
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
+    <!-- Main Heading Link -->
+    <a href="https://bangodesign.cloud" class="hero-title-link">
+      <h1>BANGODESIGN<span>.cloud</span></h1>
+    </a>
+    <p>AI-powered creativity for campaigns that inspire and win. Plan. Design. Write. Launch. All in one unified marketing workspace built for modern creators.</p>
     
-    const modal = document.getElementById('waitlist-modal');
-    const openModalBtns = document.querySelectorAll('.open-waitlist-btn');
-    const closeModalBtn = document.getElementById('close-modal-btn');
+    <!-- Launch Badge Link -->
+    <a href="https://bangodesign.cloud" class="launch-date-container">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      <span>Launching 1st August 2026</span>
+    </a>
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = LAUNCH_DATE - now;
+    <div>
+      <button class="btn-lg open-waitlist-btn">
+        Join the Waitlist &rarr;
+      </button>
+    </div>
+  </div>
 
-      if (distance < 0) {
-        document.getElementById('countdown').innerHTML = "<div style='font-size: 1.5rem; font-weight: 800; color: var(--primary)'>WE ARE LIVE!</div>";
-        return;
+  <!-- Hero Right Column: SaaS Campaign Generation Wizard UI Mockup -->
+  <div class="hero-right">
+    <div class="workspace-window">
+      
+      <!-- Window Bar -->
+      <div class="window-header">
+        <div class="window-dot dot-red"></div>
+        <div class="window-dot dot-yellow"></div>
+        <div class="window-dot dot-green"></div>
+        <span class="window-title-text">Bango Campaign Generator — Step 1 of 16</span>
+      </div>
+
+      <div class="window-body">
+        
+        <!-- Left Sidebar: Progress Steps Tracker -->
+        <div class="step-sidebar">
+          <span class="panel-heading-text">Workflow</span>
+          
+          <div class="step-item active">
+            <span class="step-num">Step 01</span>
+            <span>Candidate</span>
+            <span class="step-status">Active</span>
+          </div>
+          
+          <div class="step-item">
+            <span class="step-num">Step 02</span>
+            <span>Location</span>
+          </div>
+          
+          <div class="step-item">
+            <span class="step-num">Step 03</span>
+            <span>Slogan & CTA</span>
+          </div>
+          
+          <div class="step-item">
+            <span class="step-num">Step 04</span>
+            <span>Agenda</span>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">Step 05</span>
+            <span>Image Upload</span>
+          </div>
+        </div>
+
+        <!-- Center Canvas Area: Conversational AI Assistant Wizard -->
+        <div class="wizard-canvas-area">
+          <div class="canvas-glow-blob"></div>
+          
+          <div class="assistant-card">
+            <!-- AI Chat Prompt Question -->
+            <div class="assistant-bubble">
+              Hey there! Let's start with your basic info. What is your <strong>Name, Position, and Political Party?</strong>
+            </div>
+
+            <!-- Typing User Response Field -->
+            <div class="assistant-input-box">
+              <span>George Lagat, MP, UDA</span>
+              <div class="typed-cursor"></div>
+            </div>
+
+            <!-- Next Button CTA -->
+            <button class="wizard-next-btn">Next Step &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Right Sidebar: Live Price & Budget Estimator -->
+        <div class="pricing-panel">
+          <span class="panel-heading-text">Estimator</span>
+          
+          <div class="calculator-block">
+            <div class="calc-row">
+              <span>Base Price</span>
+              <span>KES 250</span>
+            </div>
+            
+            <div class="calc-row">
+              <span>Add-ons</span>
+              <span class="green-p">KES 0</span>
+            </div>
+
+            <div class="calc-row">
+              <span>Output</span>
+              <span>Digital</span>
+            </div>
+            
+            <div class="calc-row total">
+              <span>Total</span>
+              <span>KES 250</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Features Grid -->
+<section class="features-section">
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(238, 242, 255, 0.8); color: #4F46E5;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+        </svg>
+      </div>
+      <h3>AI Design Studio</h3>
+      <p>Generate highly-optimized brand designs and creative canvas layouts in real-time.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(239, 246, 255, 0.8); color: #2563EB;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+          <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+      </div>
+      <h3>AI Content Writer</h3>
+      <p>Write high-converting advertising copies, headings, and newsletters customized for your audience.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(245, 243, 255, 0.8); color: #7C3AED;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="6"></circle>
+        </svg>
+      </div>
+      <h3>Campaign Strategy</h3>
+      <p>Derive complete launch structures and actionable roadmaps calibrated for peak response.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(236, 253, 245, 0.8); color: #059669;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 20V10M12 20V4M6 20v-6"></path>
+        </svg>
+      </div>
+      <h3>Smart Analytics</h3>
+      <p>Track engagement, reach, and user conversion ratios across networks under one console.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Live Countdown Section -->
+<section class="countdown-section">
+  <div class="countdown-title">Countdown to Launch</div>
+  <div class="countdown-grid" id="countdown">
+    <div class="countdown-item">
+      <span class="countdown-number" id="days">00</span>
+      <span class="countdown-label">Days</span>
+    </div>
+    <div class="countdown-divider">:</div>
+    <div class="countdown-item">
+      <span class="countdown-number" id="hours">00</span>
+      <span class="countdown-label">Hours</span>
+    </div>
+    <div class="countdown-divider">:</div>
+    <div class="countdown-item">
+      <span class="countdown-number" id="minutes">00</span>
+      <span class="countdown-label">Minutes</span>
+    </div>
+    <div class="countdown-divider">:</div>
+    <div class="countdown-item">
+      <span class="countdown-number" id="seconds">00</span>
+      <span class="countdown-label">Seconds</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 Bango Design. All rights reserved.</p>
+</footer>
+
+<!-- Modal Overlay / Form -->
+<div class="modal-overlay" id="waitlist-modal">
+  <div class="modal-card">
+    <button class="modal-close" id="close-modal-btn">&times;</button>
+    
+    <div class="modal-header">
+      <h2>Join the Waitlist</h2>
+      <p>Submit your details to secure priority early access for our launch.</p>
+    </div>
+
+    <!-- Replace YOUR_FORMSPREE_FORM_ID with the key generated in Formspree -->
+    <form id="waitlist-form" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID" method="POST">
+      <div class="form-group">
+        <label for="user-name">Your Name</label>
+        <input type="text" id="user-name" name="name" class="form-input" placeholder="Alex Carter" required autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="user-email">Email Address</label>
+        <input type="email" id="user-email" name="email" class="form-input" placeholder="name@domain.com" required autocomplete="email">
+      </div>
+      <button type="submit" class="btn-submit">Secure Priority Access</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Asset Fallback Configuration
+  window.addEventListener('DOMContentLoaded', () => {
+    const logoImgs = document.querySelectorAll('.header-logo-img');
+    logoImgs.forEach(img => {
+      img.onload = () => {
+        img.style.display = 'inline-block';
+        if (img.nextElementSibling) {
+          img.nextElementSibling.style.display = 'none';
+        }
+      };
+      img.onerror = () => {
+        img.style.display = 'none';
+        if (img.nextElementSibling) {
+          img.nextElementSibling.style.display = 'inline-block';
+        }
+      };
+      if (img.complete) {
+        if (img.naturalWidth > 0) {
+          img.onload();
+        } else {
+          img.onerror();
+        }
       }
+    });
+  });
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  // Countdown Target Date Settings (August 1st, 2026)
+  const LAUNCH_DATE = new Date("August 1, 2026 00:00:00").getTime();
 
-      daysEl.textContent = String(days).padStart(2, '0');
-      hoursEl.textContent = String(hours).padStart(2, '0');
-      minutesEl.textContent = String(minutes).padStart(2, '0');
-      secondsEl.textContent = String(seconds).padStart(2, '0');
+  const daysEl = document.getElementById('days');
+  const hoursEl = document.getElementById('hours');
+  const minutesEl = document.getElementById('minutes');
+  const secondsEl = document.getElementById('seconds');
+  
+  const modal = document.getElementById('waitlist-modal');
+  const openModalBtns = document.querySelectorAll('.open-waitlist-btn');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = LAUNCH_DATE - now;
+
+    if (distance < 0) {
+      document.getElementById('countdown').innerHTML = "<div style='font-size: 1.5rem; font-weight: 800; color: var(--primary)'>WE ARE LIVE!</div>";
+      return;
     }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Modal Interaction
-    openModalBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        modal.classList.add('active');
-      });
+    daysEl.textContent = String(days).padStart(2, '0');
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minutesEl.textContent = String(minutes).padStart(2, '0');
+    secondsEl.textContent = String(seconds).padStart(2, '0');
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Modal Interaction
+  openModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.classList.add('active');
     });
+  });
 
-    closeModalBtn.addEventListener('click', () => {
+  closeModalBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
       modal.classList.remove('active');
-    });
+    }
+  });
 
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-      }
-    });
+  // Interactive AJAX Formspree submission with 3-second auto-close transition
+  document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Stop standard page redirect
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    
+    submitBtn.textContent = "Securing Spot...";
+    submitBtn.disabled = true;
 
-    // Interactive AJAX Formspree submission with 3-second auto-close transition
-    document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
-      e.preventDefault(); // Stop standard page redirect
-      
-      const form = e.target;
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalBtnText = submitBtn.textContent;
-      
-      submitBtn.textContent = "Securing Spot...";
-      submitBtn.disabled = true;
-
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          // Find the modal card and replace its HTML with a success state
-          const modalCard = document.querySelector('.modal-card');
-          modalCard.innerHTML = `
-            <div style="text-align: center; padding: 2rem 1rem; animation: scaleUp 0.3s ease-out forwards;">
-              <div style="width: 56px; height: 56px; background: #DEF7EC; color: #03543F; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: 1.25rem; margin-left: auto; margin-right: auto;">&check;</div>
-              <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #0F172A;">You're on the list!</h2>
-              <p style="font-size: 0.875rem; color: #475569; line-height: 1.5;">Success! Returning you to the launch page in 3 seconds...</p>
-            </div>
-          `;
-
-          // Wait 3 seconds, then close the modal smoothly
-          setTimeout(() => {
-            const modalElement = document.getElementById('waitlist-modal');
-            modalElement.classList.remove('active');
-            
-            // Reload after closing to reset the modal form for future use
-            setTimeout(() => {
-              window.location.reload();
-            }, 400);
-          }, 3000);
-
-        } else {
-          const data = await response.json();
-          alert(data.errors ? data.errors.map(err => err.message).join(', ') : 'Something went wrong. Please try again.');
-          submitBtn.textContent = originalBtnText;
-          submitBtn.disabled = false;
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
         }
-      } catch (error) {
-        alert('An error occurred. Please try again.');
+      });
+
+      if (response.ok) {
+        // Find the modal card and replace its HTML with a success state
+        const modalCard = document.querySelector('.modal-card');
+        modalCard.innerHTML = `
+          <div style="text-align: center; padding: 2rem 1rem; animation: scaleUp 0.3s ease-out forwards;">
+            <div style="width: 56px; height: 56px; background: #DEF7EC; color: #03543F; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: 1.25rem; margin-left: auto; margin-right: auto;">&check;</div>
+            <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #0F172A;">You're on the list!</h2>
+            <p style="font-size: 0.875rem; color: #475569; line-height: 1.5;">Success! Returning you to the launch page in 3 seconds...</p>
+          </div>
+        `;
+
+        // Wait 3 seconds, then close the modal smoothly
+        setTimeout(() => {
+          const modalElement = document.getElementById('waitlist-modal');
+          modalElement.classList.remove('active');
+          
+          // Reload after closing to reset the modal form for future use
+          setTimeout(() => {
+            window.location.reload();
+          }, 400);
+        }, 3000);
+
+      } else {
+        const data = await response.json();
+        alert(data.errors ? data.errors.map(err => err.message).join(', ') : 'Something went wrong. Please try again.');
         submitBtn.textContent = originalBtnText;
         submitBtn.disabled = false;
       }
-    });
-  </script>
+    } catch (error) {
+      alert('An error occurred. Please try again.');
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
+    }
+  });
+</script>
 </body>
 </html>
